@@ -2,27 +2,22 @@
 # Pure python package
 %define debug_package %{nil} 
 
-# We package the development version which will be released in a couple of months
-# hg clone https://bitbucket.org/tortoisehg/stable/ && cd stable && hg up -C default && python setup.py sdist
-%define hgrev   2525801b8b8d
-
 Name:           tortoisehg
 Version:        0.9
-Release:        0.2.hg%{hgrev}%{dist}
+Release:        1%{dist}
 Summary:        Mercurial GUI command line tool hgtk
 Group:          Development/Tools
 License:        GPLv2
-# Few files are under the more permissive GPLv2+
-URL:            http://bitbucket.org/tortoisehg/stable/wiki/
-#Source0:       http://bitbucket.org/tortoisehg/stable/downloads/tortoisehg-%{version}.tar.gz
-Source0:        %{name}-0.8.3+447-%{hgrev}.tar.gz
+# - few files are however under the more permissive GPLv2+
+URL:            http://tortoisehg.bitbucket.org/
+Source0:        http://bitbucket.org/tortoisehg/stable/downloads/tortoisehg-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-# This package should be noarch, but we can't do it because the nautilus
-# subpackage has to be arch-specific (because of lib64)
+# This package _is_ noarch, but that isn't possible because the nautilus
+# subpackage has to be arch-specific:
 # BuildArch:    noarch
 BuildRequires:  python-devel, gettext, python-sphinx
-Requires:       python-iniparse, mercurial >= 1.3, gnome-python2-gconf
-Requires:       gnome-python2-gtksourceview, pygtk2
+Requires:       python-iniparse, mercurial >= 1.4, gnome-python2-gconf
+Requires:       gnome-python2-gtksourceview, pygtk2, gnome-python2-gtkspell
 
 %description
 This package contains the hgtk command line tool, which provides a graphical
@@ -39,7 +34,7 @@ Mercurial distributed revision control system available in the file manager
 with a graphical interface. 
 
 %prep
-%setup -q -n %{name}-0.8.3+447-%{hgrev}
+%setup -q
 
 # Fedora Nautilus python extensions lives in lib64 on x86_64 (https://bugzilla.redhat.com/show_bug.cgi?id=509633) ...
 %{__sed} -i "s,lib/nautilus,%{_lib}/nautilus,g" setup.py
@@ -89,6 +84,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/nautilus/extensions-2.0/python/nautilus-thg.py*
 
 %changelog
+* Wed Nov 18 2009 Mads Kiilerich <mads@kiilerich.com> - 0.9-1
+- Update to tortoisehg-0.9
+
 * Mon Nov 16 2009 Mads Kiilerich <mads@kiilerich.com> - 0.9-0.2.hg2525801b8b8d
 - New upstream snapshot, pretty close to 0.9
 - First koji upload
