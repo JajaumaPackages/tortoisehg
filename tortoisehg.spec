@@ -3,14 +3,14 @@
 %define debug_package %{nil} 
 
 Name:           tortoisehg
-Version:        0.9.2
-Release:        2%{dist}
+Version:        0.9.3
+Release:        1%{dist}
 Summary:        Mercurial GUI command line tool hgtk
 Group:          Development/Tools
 License:        GPLv2
 # - few files are however under the more permissive GPLv2+
 URL:            http://tortoisehg.bitbucket.org/
-Source0:        http://bitbucket.org/tortoisehg/stable/downloads/tortoisehg-%{version}.tar.gz
+Source0:        http://bitbucket.org/tortoisehg/targz/downloads/tortoisehg-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 # This package _is_ noarch, but that isn't possible because the nautilus
 # subpackage has to be arch-specific:
@@ -84,6 +84,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/nautilus/extensions-2.0/python/nautilus-thg.py*
 
 %changelog
+* Tue Feb  2 2010 Mads Kiilerich <mads@kiilerich.com> - 0.9.3-1
+- New upstream minor release 0.9.3
+
 * Sat Jan  2 2010 Mads Kiilerich <mads@kiilerich.com> - 0.9.2-1
 - New upstream bugfix release 0.9.2
 
