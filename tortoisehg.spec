@@ -3,7 +3,7 @@
 %define debug_package %{nil} 
 
 Name:           tortoisehg
-Version:        1.0
+Version:        1.0.1
 Release:        1%{dist}
 Summary:        Mercurial GUI command line tool hgtk
 Group:          Development/Tools
@@ -16,7 +16,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 # subpackage has to be arch-specific:
 # BuildArch:    noarch
 BuildRequires:  python-devel, gettext, python-sphinx
-Requires:       python-iniparse, mercurial >= 1.4, gnome-python2-gconf
+Requires:       python-iniparse, mercurial >= 1.5, mercurial < 1.6, gnome-python2-gconf
 Requires:       gnome-python2-gtksourceview, pygtk2, gnome-python2-gtkspell
 
 %description
@@ -84,6 +84,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/nautilus/extensions-2.0/python/nautilus-thg.py*
 
 %changelog
+* Fri Apr  2 2010 Mads Kiilerich <mads@kiilerich.com> - 1.0.1-1
+- New upstream bugfix release 1.0.1
+
 * Sat Mar  6 2010 Mads Kiilerich <mads@kiilerich.com> - 1.0-1
 - New upstream release 1.0
 
