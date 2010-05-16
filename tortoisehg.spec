@@ -3,7 +3,7 @@
 %define debug_package %{nil} 
 
 Name:           tortoisehg
-Version:        1.0.1
+Version:        1.0.3
 Release:        1%{dist}
 Summary:        Mercurial GUI command line tool hgtk
 Group:          Development/Tools
@@ -17,7 +17,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 # BuildArch:    noarch
 BuildRequires:  python-devel, gettext, python-sphinx
 Requires:       python-iniparse, mercurial >= 1.5, mercurial < 1.6, gnome-python2-gconf
-Requires:       gnome-python2-gtksourceview, pygtk2, gnome-python2-gtkspell
+Requires:       pygtk2, gnome-python2-gtkspell
 
 %description
 This package contains the hgtk command line tool, which provides a graphical
@@ -68,7 +68,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 
 %defattr(-,root,root,-)
-%doc COPYING.txt ReleaseNotes.txt doc/build/html/
+%doc COPYING.txt doc/build/html/
 %{_bindir}/hgtk
 %{python_sitelib}/tortoisehg/
 %{python_sitelib}/tortoisehg-*.egg-info
@@ -84,6 +84,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/nautilus/extensions-2.0/python/nautilus-thg.py*
 
 %changelog
+* Sun May 16 2010 Mads Kiilerich <mads@kiilerich.com> - 1.0.3-1
+- New upstream bugfix release 1.0.3
+- Drop unused dependency gnome-python2-gtksourceview
+
 * Fri Apr  2 2010 Mads Kiilerich <mads@kiilerich.com> - 1.0.1-1
 - New upstream bugfix release 1.0.1
 
