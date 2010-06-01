@@ -3,7 +3,7 @@
 %define debug_package %{nil} 
 
 Name:           tortoisehg
-Version:        1.0.3
+Version:        1.0.4
 Release:        1%{dist}
 Summary:        Mercurial GUI command line tool hgtk
 Group:          Development/Tools
@@ -84,6 +84,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/nautilus/extensions-2.0/python/nautilus-thg.py*
 
 %changelog
+* Wed Jun  2 2010 Mads Kiilerich <mads@kiilerich.com> - 1.0.4-1
+- New upstream bugfix release 1.0.4
+
 * Sun May 16 2010 Mads Kiilerich <mads@kiilerich.com> - 1.0.3-1
 - New upstream bugfix release 1.0.3
 - Drop unused dependency gnome-python2-gtksourceview
