@@ -4,7 +4,7 @@
 
 Name:           tortoisehg
 Version:        1.1.1
-Release:        1%{dist}
+Release:        2%{dist}
 Summary:        Mercurial GUI command line tool hgtk
 Group:          Development/Tools
 License:        GPLv2
@@ -84,6 +84,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/nautilus/extensions-2.0/python/nautilus-thg.py*
 
 %changelog
+* Thu Jul 22 2010 David Malcolm <dmalcolm@redhat.com> - 1.1.1-2
+- Rebuilt for https://fedoraproject.org/wiki/Features/Python_2.7/MassRebuild
+
 * Tue Jul 13 2010 Mads Kiilerich <mads@kiilerich.com> - 1.1.1-1
 - tortoisehg-1.1.1 with minor bugfixes
 - requires mercurial-1.6
