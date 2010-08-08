@@ -3,8 +3,8 @@
 %define debug_package %{nil} 
 
 Name:           tortoisehg
-Version:        1.1.1
-Release:        2%{dist}
+Version:        1.1.2
+Release:        1%{dist}
 Summary:        Mercurial GUI command line tool hgtk
 Group:          Development/Tools
 License:        GPLv2
@@ -32,6 +32,8 @@ Requires:       %{name} = %{version}-%{release}, nautilus-python
 This package contains the TortoiseHg Gnome/Nautilus extension, which makes the
 Mercurial distributed revision control system available in the file manager
 with a graphical interface. 
+
+Note that the nautilus extension has been deprecated upstream.
 
 %prep
 %setup -q
@@ -84,6 +86,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/nautilus/extensions-2.0/python/nautilus-thg.py*
 
 %changelog
+* Sun Aug  8 2010 Mads Kiilerich <mads@kiilerich.com> - 1.1.2-1
+- tortoisehg-1.1.2
+
 * Thu Jul 22 2010 David Malcolm <dmalcolm@redhat.com> - 1.1.1-2
 - Rebuilt for https://fedoraproject.org/wiki/Features/Python_2.7/MassRebuild
 
