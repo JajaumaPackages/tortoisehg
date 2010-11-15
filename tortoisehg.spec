@@ -3,8 +3,8 @@
 %define debug_package %{nil} 
 
 Name:           tortoisehg
-Version:        1.1.5
-Release:        1%{dist}
+Version:        1.1.6
+Release:        1%{?dist}
 Summary:        Mercurial GUI command line tool hgtk
 Group:          Development/Tools
 License:        GPLv2
@@ -86,6 +86,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/nautilus/extensions-2.0/python/nautilus-thg.py*
 
 %changelog
+* Tue Nov 16 2010 Mads Kiilerich <mads@kiilerich.com> - 1.1.6-1
+- tortoisehg-1.1.6
+
 * Sun Nov 07 2010 Mads Kiilerich <mads@kiilerich.com> - 1.1.5-1
 - tortoisehg-1.1.5
 
