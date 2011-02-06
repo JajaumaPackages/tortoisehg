@@ -2,25 +2,32 @@
 # Pure python package
 %define debug_package %{nil} 
 
+%define hash cff31955a6fa
+%define versionbase 1.9.2
+%define versionplus 4
+%define plusversion %{versionbase}+%{versionplus}
 Name:           tortoisehg
-Version:        1.1.9.1
+Version:        %{versionbase}.%{versionplus}
 Release:        1%{?dist}
-Summary:        Mercurial GUI command line tool hgtk
+Summary:        Mercurial GUI command line tool thg
 Group:          Development/Tools
 License:        GPLv2
 # - few files are however under the more permissive GPLv2+
 URL:            http://tortoisehg.bitbucket.org/
-Source0:        http://bitbucket.org/tortoisehg/targz/downloads/tortoisehg-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+# hg clone http://bitbucket.org/tortoisehg/thg
+# python setup.py clean build_qt build_mo sdist
+Source0:        %{name}-%{plusversion}-%{hash}.tar.gz
 # This package _is_ noarch, but that isn't possible because the nautilus
 # subpackage has to be arch-specific:
 # BuildArch:    noarch
-BuildRequires:  python-devel, gettext, python-sphinx
-Requires:       python-iniparse, mercurial >= 1.6, gnome-python2-gconf
-Requires:       pygtk2, gnome-python2-gtkspell
+BuildRequires:  python-devel, gettext, python-sphinx, PyQt4-devel, desktop-file-utils
+Requires:       python-iniparse, mercurial >= 1.6
+# gconf needed at util/shlib.py for browse_url(url).
+Requires:       gnome-python2-gconf
+Requires:       PyQt4 >= 4.6, qscintilla-python, python-pygments
 
 %description
-This package contains the hgtk command line tool, which provides a graphical
+This package contains the thg command line tool, which provides a graphical
 user interface to the Mercurial distributed revision control system. 
 
 %package        nautilus
@@ -36,7 +43,7 @@ with a graphical interface.
 Note that the nautilus extension has been deprecated upstream.
 
 %prep
-%setup -q
+%setup -q -n %{name}-%{plusversion}-%{hash}
 
 # Fedora Nautilus python extensions lives in lib64 on x86_64 (https://bugzilla.redhat.com/show_bug.cgi?id=509633) ...
 %{__sed} -i "s,lib/nautilus,%{_lib}/nautilus,g" setup.py
@@ -60,7 +67,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__python} setup.py install -O1 --skip-build --root $RPM_BUILD_ROOT
 
-install -m 644 -D contrib/_hgtk $RPM_BUILD_ROOT/%{_datadir}/zsh/site-functions/_hgtk
+mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/mercurial/hgrc.d
+install contrib/mergetools.rc $RPM_BUILD_ROOT%{_sysconfdir}/mercurial/hgrc.d/thgmergetools.rc
+
+ln -s tortoisehg/icons/svg/thg_logo.svg $RPM_BUILD_ROOT%{_datadir}/pixmaps/%{name}_logo.svg
+desktop-file-install --dir=$RPM_BUILD_ROOT%{_datadir}/applications contrib/%{name}.desktop
 
 %find_lang %{name}
 
@@ -71,21 +82,24 @@ rm -rf $RPM_BUILD_ROOT
 
 %defattr(-,root,root,-)
 %doc COPYING.txt doc/build/html/
-%{_bindir}/hgtk
+%{_bindir}/thg
 %{python_sitelib}/tortoisehg/
 %{python_sitelib}/tortoisehg-*.egg-info
 %{_datadir}/pixmaps/tortoisehg/
+%{_datadir}/pixmaps/%{name}_logo.svg
+%{_datadir}/applications/%{name}.desktop
 
-# /usr/share/zsh/site-functions/ is owned by zsh package which we don't want to
-# require. We also don't want to create a sub-package just for this dependency.
-# Instead we just claim ownership of the zsh top folder ...
-%{_datadir}/zsh
+%config(noreplace) %attr(644,root,root) %{_sysconfdir}/mercurial/hgrc.d/thgmergetools.rc
 
 %files nautilus
 %defattr(-,root,root,-)
 %{_libdir}/nautilus/extensions-2.0/python/nautilus-thg.py*
 
 %changelog
+* Mon Feb 07 2011 Mads Kiilerich <mads@kiilerich.com> - 1.9.2.4-1
+- tortoisehg-1.9.2+4-cff31955a6fa
+- preparing for the qt based TortoiseHg 2.0 in Fedora 15
+
 * Thu Feb 03 2011 Mads Kiilerich <mads@kiilerich.com> - 1.1.9.1-1
 - tortoisehg-1.1.9.1
 
