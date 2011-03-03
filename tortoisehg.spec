@@ -93,6 +93,9 @@ rm -rf $RPM_BUILD_ROOT
 * Thu Mar 03 2011 Mads Kiilerich <mads@kiilerich.com> - 2.0-1
 - tortoisehg-2.0
 
+* Wed Feb 09 2011 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.9.2.4-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_15_Mass_Rebuild
+
 * Mon Feb 07 2011 Mads Kiilerich <mads@kiilerich.com> - 1.9.2.4-1
 - tortoisehg-1.9.2+4-cff31955a6fa
 - preparing for the qt based TortoiseHg 2.0 in Fedora 15
