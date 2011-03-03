@@ -1,22 +1,16 @@
 %{!?python_sitelib: %global python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
 # Pure python package
-%define debug_package %{nil} 
+%define debug_package %{nil}
 
-%define hash cff31955a6fa
-%define versionbase 1.9.2
-%define versionplus 4
-%define plusversion %{versionbase}+%{versionplus}
 Name:           tortoisehg
-Version:        %{versionbase}.%{versionplus}
+Version:        2.0
 Release:        1%{?dist}
 Summary:        Mercurial GUI command line tool thg
 Group:          Development/Tools
 License:        GPLv2
 # - few files are however under the more permissive GPLv2+
 URL:            http://tortoisehg.bitbucket.org/
-# hg clone http://bitbucket.org/tortoisehg/thg
-# python setup.py clean build_qt build_mo sdist
-Source0:        %{name}-%{plusversion}-%{hash}.tar.gz
+Source0:        http://bitbucket.org/tortoisehg/targz/downloads/%{name}-%{version}.tar.gz
 # This package _is_ noarch, but that isn't possible because the nautilus
 # subpackage has to be arch-specific:
 # BuildArch:    noarch
@@ -28,22 +22,22 @@ Requires:       PyQt4 >= 4.6, qscintilla-python, python-pygments
 
 %description
 This package contains the thg command line tool, which provides a graphical
-user interface to the Mercurial distributed revision control system. 
+user interface to the Mercurial distributed revision control system.
 
 %package        nautilus
-Summary:        Mercurial GUI plugin to Nautilus file manager 
+Summary:        Mercurial GUI plug-in to the Nautilus file manager
 Group:          Development/Tools
 Requires:       %{name} = %{version}-%{release}, nautilus-python
 
 %description    nautilus
 This package contains the TortoiseHg Gnome/Nautilus extension, which makes the
 Mercurial distributed revision control system available in the file manager
-with a graphical interface. 
+with a graphical interface.
 
 Note that the nautilus extension has been deprecated upstream.
 
 %prep
-%setup -q -n %{name}-%{plusversion}-%{hash}
+%setup -q
 
 # Fedora Nautilus python extensions lives in lib64 on x86_64 (https://bugzilla.redhat.com/show_bug.cgi?id=509633) ...
 %{__sed} -i "s,lib/nautilus,%{_lib}/nautilus,g" setup.py
@@ -96,6 +90,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/nautilus/extensions-2.0/python/nautilus-thg.py*
 
 %changelog
+* Thu Mar 03 2011 Mads Kiilerich <mads@kiilerich.com> - 2.0-1
+- tortoisehg-2.0
+
 * Mon Feb 07 2011 Mads Kiilerich <mads@kiilerich.com> - 1.9.2.4-1
 - tortoisehg-1.9.2+4-cff31955a6fa
 - preparing for the qt based TortoiseHg 2.0 in Fedora 15
