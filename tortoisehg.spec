@@ -4,7 +4,7 @@
 
 Name:           tortoisehg
 Version:        2.2.2
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Mercurial GUI command line tool thg
 Group:          Development/Tools
 License:        GPLv2
@@ -50,6 +50,9 @@ icon_path    = "%{_datadir}/pixmaps/tortoisehg/icons"
 nofork       = True
 EOT
 
+# hack: accept Mercurial 2.1 too
+sed -i 's, + 1, + 2,g' tortoisehg/util/hgversion.py
+
 %build
 %{__python} setup.py build
 
@@ -90,6 +93,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/nautilus/extensions-2.0/python/nautilus-thg.py*
 
 %changelog
+* Wed Jan 25 2012 Mads Kiilerich <mads@kiilerich.com> - 2.2.2-3
+- actually apply hack to relax version check so it works with mercurial-2.1
+
 * Wed Jan 25 2012 Mads Kiilerich <mads@kiilerich.com> - 2.2.2-2
 - bump Mercurial version requirement to accept mercurial-2.1-1.rc1.
   tortoisehg-2.2.2 happens to work with the next version of Mercurial anyway.
