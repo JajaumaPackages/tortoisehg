@@ -3,8 +3,8 @@
 %define debug_package %{nil}
 
 Name:           tortoisehg
-Version:        2.2.2
-Release:        3%{?dist}
+Version:        2.3
+Release:        1%{?dist}
 Summary:        Mercurial GUI command line tool thg
 Group:          Development/Tools
 License:        GPLv2
@@ -15,7 +15,7 @@ Source0:        http://bitbucket.org/tortoisehg/targz/downloads/%{name}-%{versio
 # subpackage has to be arch-specific:
 # BuildArch:    noarch
 BuildRequires:  python-devel, gettext, python-sphinx, PyQt4-devel, desktop-file-utils
-Requires:       python-iniparse, mercurial >= 2.0, mercurial < 2.2
+Requires:       python-iniparse, mercurial >= 2.1, mercurial < 2.2
 # gconf needed at util/shlib.py for browse_url(url).
 Requires:       gnome-python2-gconf
 Requires:       PyQt4 >= 4.6, qscintilla-python, python-pygments
@@ -93,6 +93,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/nautilus/extensions-2.0/python/nautilus-thg.py*
 
 %changelog
+* Thu Feb 16 2012 Mads Kiilerich <mads@kiilerich.com> - 2.3-1
+- tortoisehg-2.3
+
 * Wed Jan 25 2012 Mads Kiilerich <mads@kiilerich.com> - 2.2.2-3
 - actually apply hack to relax version check so it works with mercurial-2.1
 
