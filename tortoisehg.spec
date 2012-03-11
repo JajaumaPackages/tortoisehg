@@ -3,7 +3,7 @@
 %define debug_package %{nil}
 
 Name:           tortoisehg
-Version:        2.3
+Version:        2.3.1
 Release:        1%{?dist}
 Summary:        Mercurial GUI command line tool thg
 Group:          Development/Tools
@@ -50,9 +50,6 @@ icon_path    = "%{_datadir}/pixmaps/tortoisehg/icons"
 nofork       = True
 EOT
 
-# hack: accept Mercurial 2.1 too
-sed -i 's, + 1, + 2,g' tortoisehg/util/hgversion.py
-
 %build
 %{__python} setup.py build
 
@@ -93,6 +90,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/nautilus/extensions-2.0/python/nautilus-thg.py*
 
 %changelog
+* Sat Mar 10 2012 Mads Kiilerich <mads@kiilerich.com> - 2.3.1-1
+- tortoisehg-2.3.1
+- remove Mercurial 2.1 hack
+
 * Thu Feb 16 2012 Mads Kiilerich <mads@kiilerich.com> - 2.3-1
 - tortoisehg-2.3
 
