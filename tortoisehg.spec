@@ -3,8 +3,8 @@
 %define debug_package %{nil}
 
 Name:           tortoisehg
-Version:        2.3.2
-Release:        2%{?dist}
+Version:        2.4
+Release:        1%{?dist}
 Summary:        Mercurial GUI command line tool thg
 Group:          Development/Tools
 License:        GPLv2
@@ -50,8 +50,8 @@ icon_path    = "%{_datadir}/pixmaps/tortoisehg/icons"
 nofork       = True
 EOT
 
-# hack: accept Mercurial 2.2.x too
-sed -i -e 's, + 1, + 2,g' -e 's,== nextver,<= nextver,g' tortoisehg/util/hgversion.py
+# hack: accept a higher Mercurial version
+#sed -i -e 's, + 1, + 2,g' -e 's,== nextver,<= nextver,g' tortoisehg/util/hgversion.py
 
 %build
 %{__python} setup.py build
@@ -93,6 +93,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/nautilus/extensions-2.0/python/nautilus-thg.py*
 
 %changelog
+* Sun May 06 2012 Mads Kiilerich <mads@kiilerich.com> - 2.4-1
+- tortoisehg-2.4
+
 * Fri May 04 2012 Mads Kiilerich <mads@kiilerich.com> - 2.3.2-2
 - pretend compatibility with Mercurial 2.2.x as well - not just 2.2
 
