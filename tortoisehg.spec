@@ -3,7 +3,7 @@
 %define debug_package %{nil}
 
 Name:           tortoisehg
-Version:        2.4.1
+Version:        2.4.2
 Release:        1%{?dist}
 Summary:        Mercurial GUI command line tool thg
 Group:          Development/Tools
@@ -67,7 +67,7 @@ rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/mercurial/hgrc.d
 install contrib/mergetools.rc $RPM_BUILD_ROOT%{_sysconfdir}/mercurial/hgrc.d/thgmergetools.rc
 
-ln -s tortoisehg/icons/svg/thg_logo.svg $RPM_BUILD_ROOT%{_datadir}/pixmaps/%{name}_logo.svg
+ln -s tortoisehg/icons/svg/thg_logo.svg $RPM_BUILD_ROOT%{_datadir}/pixmaps/thg_logo.svg
 desktop-file-install --dir=$RPM_BUILD_ROOT%{_datadir}/applications contrib/%{name}.desktop
 
 %find_lang %{name}
@@ -83,7 +83,7 @@ rm -rf $RPM_BUILD_ROOT
 %{python_sitelib}/tortoisehg/
 %{python_sitelib}/tortoisehg-*.egg-info
 %{_datadir}/pixmaps/tortoisehg/
-%{_datadir}/pixmaps/%{name}_logo.svg
+%{_datadir}/pixmaps/thg_logo.svg
 %{_datadir}/applications/%{name}.desktop
 
 %config(noreplace) %attr(644,root,root) %{_sysconfdir}/mercurial/hgrc.d/thgmergetools.rc
@@ -93,6 +93,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/nautilus/extensions-2.0/python/nautilus-thg.py*
 
 %changelog
+* Sun Jul 08 2012 Mads Kiilerich <mads@kiilerich.com> - 2.4.2-1
+- tortoisehg-2.4.2
+- fix naming of logo svg
+
 * Sat Jun 09 2012 Mads Kiilerich <mads@kiilerich.com> - 2.4.1-1
 - tortoisehg-2.4.1
 
