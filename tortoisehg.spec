@@ -1,19 +1,15 @@
 %{!?python_sitelib: %global python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
-# Pure python package
-%define debug_package %{nil}
 
 Name:           tortoisehg
 Version:        2.4.2
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Mercurial GUI command line tool thg
 Group:          Development/Tools
 License:        GPLv2
 # - few files are however under the more permissive GPLv2+
 URL:            http://tortoisehg.bitbucket.org/
 Source0:        http://bitbucket.org/tortoisehg/targz/downloads/%{name}-%{version}.tar.gz
-# This package _is_ noarch, but that isn't possible because the nautilus
-# subpackage has to be arch-specific:
-# BuildArch:    noarch
+BuildArch:      noarch
 BuildRequires:  python-devel, gettext, python-sphinx, PyQt4-devel, desktop-file-utils
 Requires:       python-iniparse, mercurial >= 2.1, mercurial < 2.3
 # gconf needed at util/shlib.py for browse_url(url).
@@ -95,6 +91,7 @@ rm -rf $RPM_BUILD_ROOT
 %changelog
 * Sun Aug 19 2012 Mads Kiilerich <mads@kiilerich.com> - 2.4.2-3
 - update nautilus-python extension directory
+- make the package noarch
 
 * Sat Jul 21 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.4.2-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_18_Mass_Rebuild
