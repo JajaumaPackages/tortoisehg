@@ -4,7 +4,7 @@
 
 Name:           tortoisehg
 Version:        2.4.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Mercurial GUI command line tool thg
 Group:          Development/Tools
 License:        GPLv2
@@ -39,8 +39,8 @@ Note that the nautilus extension has been deprecated upstream.
 %prep
 %setup -q
 
-# Fedora Nautilus python extensions lives in lib64 on x86_64 (https://bugzilla.redhat.com/show_bug.cgi?id=509633) ...
-%{__sed} -i "s,lib/nautilus,%{_lib}/nautilus,g" setup.py
+# Patch nautilus-python extension directory
+%{__sed} -i "s,lib/nautilus/extensions-2.0/python,share/nautilus-python/extensions,g" setup.py
 
 cat > tortoisehg/util/config.py << EOT
 bin_path     = "%{_bindir}"
@@ -90,9 +90,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files nautilus
 %defattr(-,root,root,-)
-%{_libdir}/nautilus/extensions-2.0/python/nautilus-thg.py*
+%{_datadir}/nautilus-python/extensions/nautilus-thg.py*
 
 %changelog
+* Sun Aug 19 2012 Mads Kiilerich <mads@kiilerich.com> - 2.4.2-2
+- update nautilus-python extension directory
+
 * Sun Jul 08 2012 Mads Kiilerich <mads@kiilerich.com> - 2.4.2-1
 - tortoisehg-2.4.2
 - fix naming of logo svg
