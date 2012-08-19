@@ -11,7 +11,7 @@ URL:            http://tortoisehg.bitbucket.org/
 Source0:        http://bitbucket.org/tortoisehg/targz/downloads/%{name}-%{version}.tar.gz
 BuildArch:      noarch
 BuildRequires:  python-devel, gettext, python-sphinx, PyQt4-devel, desktop-file-utils
-Requires:       python-iniparse, mercurial >= 2.1, mercurial < 2.3
+Requires:       python-iniparse, mercurial >= 2.1, mercurial <= 2.3
 # gconf needed at util/shlib.py for browse_url(url).
 Requires:       gnome-python2-gconf
 Requires:       PyQt4 >= 4.6, qscintilla-python, python-pygments
@@ -47,7 +47,7 @@ nofork       = True
 EOT
 
 # hack: accept a higher Mercurial version
-#sed -i -e 's, + 1, + 2,g' -e 's,== nextver,<= nextver,g' tortoisehg/util/hgversion.py
+sed -i -e 's, + 1, + 2,g' -e 's,== nextver,<= nextver,g' tortoisehg/util/hgversion.py
 
 %build
 %{__python} setup.py build
@@ -92,6 +92,7 @@ rm -rf $RPM_BUILD_ROOT
 * Sun Aug 19 2012 Mads Kiilerich <mads@kiilerich.com> - 2.4.2-3
 - update nautilus-python extension directory
 - make the package noarch
+- accept mercurial 2.3 while waiting for a new thg release
 
 * Sat Jul 21 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.4.2-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_18_Mass_Rebuild
