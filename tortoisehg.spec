@@ -3,8 +3,8 @@
 %define debug_package %{nil}
 
 Name:           tortoisehg
-Version:        2.4.2
-Release:        2%{?dist}
+Version:        2.4.3
+Release:        1%{?dist}
 Summary:        Mercurial GUI command line tool thg
 Group:          Development/Tools
 License:        GPLv2
@@ -93,6 +93,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/nautilus-python/extensions/nautilus-thg.py*
 
 %changelog
+* Tue Aug 21 2012 Mads Kiilerich <mads@kiilerich.com> - 2.4.3-1
+- tortoisehg-2.4.3
+
 * Sun Aug 19 2012 Mads Kiilerich <mads@kiilerich.com> - 2.4.2-2
 - update nautilus-python extension directory
 
