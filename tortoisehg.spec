@@ -1,7 +1,7 @@
 %{!?python_sitelib: %global python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
 
 Name:           tortoisehg
-Version:        2.4.3
+Version:        2.5
 Release:        1%{?dist}
 Summary:        Mercurial GUI command line tool thg
 Group:          Development/Tools
@@ -34,9 +34,6 @@ Note that the nautilus extension has been deprecated upstream.
 
 %prep
 %setup -q
-
-# Patch nautilus-python extension directory
-%{__sed} -i "s,lib/nautilus/extensions-2.0/python,share/nautilus-python/extensions,g" setup.py
 
 cat > tortoisehg/util/config.py << EOT
 bin_path     = "%{_bindir}"
@@ -89,6 +86,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/nautilus-python/extensions/nautilus-thg.py*
 
 %changelog
+* Thu Sep 06 2012 Mads Kiilerich <mads@kiilerich.com> - 2.5-1
+- tortoisehg-2.5
+
 * Tue Aug 21 2012 Mads Kiilerich <mads@kiilerich.com> - 2.4.3-1
 - tortoisehg-2.4.3
 
