@@ -4,13 +4,14 @@
 
 Name:           tortoisehg
 Version:        2.4.3
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Mercurial GUI command line tool thg
 Group:          Development/Tools
 License:        GPLv2
 # - few files are however under the more permissive GPLv2+
 URL:            http://tortoisehg.bitbucket.org/
 Source0:        http://bitbucket.org/tortoisehg/targz/downloads/%{name}-%{version}.tar.gz
+Patch1:         thg-e571f9b3eadc2e2706bd350dab33d3bee5bf2315.diff
 # This package _is_ noarch, but that isn't possible because the nautilus
 # subpackage has to be arch-specific:
 # BuildArch:    noarch
@@ -38,6 +39,7 @@ Note that the nautilus extension has been deprecated upstream.
 
 %prep
 %setup -q
+%patch1 -p1
 
 # Patch nautilus-python extension directory
 %{__sed} -i "s,lib/nautilus/extensions-2.0/python,share/nautilus-python/extensions,g" setup.py
@@ -93,6 +95,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/nautilus-python/extensions/nautilus-thg.py*
 
 %changelog
+* Tue Mar 12 2013 Mads Kiilerich <mads@kiilerich.com> - 2.4.3-2
+- support for PyQt-4.10 #920749
+
 * Tue Aug 21 2012 Mads Kiilerich <mads@kiilerich.com> - 2.4.3-1
 - tortoisehg-2.4.3
 
