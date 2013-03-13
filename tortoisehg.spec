@@ -2,13 +2,14 @@
 
 Name:           tortoisehg
 Version:        2.6.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Mercurial GUI command line tool thg
 Group:          Development/Tools
 License:        GPLv2
 # - few files are however under the more permissive GPLv2+
 URL:            http://tortoisehg.bitbucket.org/
 Source0:        http://bitbucket.org/tortoisehg/targz/downloads/%{name}-%{version}.tar.gz
+Patch1:         thg-e571f9b3eadc2e2706bd350dab33d3bee5bf2315.diff
 BuildArch:      noarch
 BuildRequires:  python-devel, gettext, python-sphinx, PyQt4-devel, desktop-file-utils
 Requires:       python-iniparse, mercurial >= 2.3, mercurial < 2.5
@@ -34,6 +35,7 @@ Note that the nautilus extension has been deprecated upstream.
 
 %prep
 %setup -q
+%patch1 -p1
 
 cat > tortoisehg/util/config.py << EOT
 bin_path     = "%{_bindir}"
@@ -86,6 +88,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/nautilus-python/extensions/nautilus-thg.py*
 
 %changelog
+* Tue Mar 12 2013 Mads Kiilerich <mads@kiilerich.com> - 2.6.2-2
+- support for PyQt-4.10 #920749
+
 * Fri Jan 04 2013 Mads Kiilerich <mads@kiilerich.com> - 2.6.2-1
 - tortoisehg-2.6.2
 
