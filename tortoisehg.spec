@@ -2,7 +2,7 @@
 
 Name:           tortoisehg
 Version:        2.8
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Mercurial GUI command line tool thg
 Group:          Development/Tools
 License:        GPLv2
@@ -86,6 +86,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/nautilus-python/extensions/nautilus-thg.py*
 
 %changelog
+* Sun Aug 04 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.8-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
+
 * Tue May 07 2013 Mads Kiilerich <mads@kiilerich.com> - 2.8-1
 - tortoisehg-2.8
 
