@@ -1,8 +1,8 @@
 %{!?python_sitelib: %global python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
 
 Name:           tortoisehg
-Version:        2.8
-Release:        2%{?dist}
+Version:        2.9
+Release:        1%{?dist}
 Summary:        Mercurial GUI command line tool thg
 Group:          Development/Tools
 License:        GPLv2
@@ -11,7 +11,7 @@ URL:            http://tortoisehg.bitbucket.org/
 Source0:        http://bitbucket.org/tortoisehg/targz/downloads/%{name}-%{version}.tar.gz
 BuildArch:      noarch
 BuildRequires:  python-devel, gettext, python-sphinx, PyQt4-devel, desktop-file-utils
-Requires:       python-iniparse, mercurial >= 2.5, mercurial < 2.7
+Requires:       python-iniparse, mercurial >= 2.6, mercurial < 2.8
 # gconf needed at util/shlib.py for browse_url(url).
 Requires:       gnome-python2-gconf
 Requires:       PyQt4 >= 4.6, qscintilla-python, python-pygments
@@ -61,7 +61,8 @@ mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/mercurial/hgrc.d
 install contrib/mergetools.rc $RPM_BUILD_ROOT%{_sysconfdir}/mercurial/hgrc.d/thgmergetools.rc
 
 ln -s tortoisehg/icons/svg/thg_logo.svg $RPM_BUILD_ROOT%{_datadir}/pixmaps/thg_logo.svg
-desktop-file-install --dir=$RPM_BUILD_ROOT%{_datadir}/applications contrib/%{name}.desktop
+cp -a contrib/%{name}.desktop thg.desktop
+desktop-file-install --dir=$RPM_BUILD_ROOT%{_datadir}/applications thg.desktop
 
 %find_lang %{name}
 
@@ -77,7 +78,7 @@ rm -rf $RPM_BUILD_ROOT
 %{python_sitelib}/tortoisehg-*.egg-info
 %{_datadir}/pixmaps/tortoisehg/
 %{_datadir}/pixmaps/thg_logo.svg
-%{_datadir}/applications/%{name}.desktop
+%{_datadir}/applications/thg.desktop
 
 %config(noreplace) %attr(644,root,root) %{_sysconfdir}/mercurial/hgrc.d/thgmergetools.rc
 
@@ -86,6 +87,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/nautilus-python/extensions/nautilus-thg.py*
 
 %changelog
+* Sun Aug 04 2013 Mads Kiilerich <mads@kiilerich.com> - 2.9-1
+- tortoisehg-2.9
+- rename desktop file to thg.desktop so it matches WM_CLASS
+
 * Sun Aug 04 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.8-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
 
