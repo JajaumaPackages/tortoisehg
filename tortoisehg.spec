@@ -2,7 +2,7 @@
 
 Name:           tortoisehg
 Version:        2.9
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Mercurial GUI command line tool thg
 Group:          Development/Tools
 License:        GPLv2
@@ -37,7 +37,7 @@ Note that the nautilus extension has been deprecated upstream.
 
 cat > tortoisehg/util/config.py << EOT
 bin_path     = "%{_bindir}"
-license_path = "%{_docdir}/%{name}-%{version}/COPYING.txt"
+license_path = "%{_pkgdocdir}/COPYING.txt"
 locale_path  = "%{_datadir}/locale"
 icon_path    = "%{_datadir}/pixmaps/tortoisehg/icons"
 nofork       = True
@@ -87,6 +87,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/nautilus-python/extensions/nautilus-thg.py*
 
 %changelog
+* Wed Aug 07 2013 Mads Kiilerich <mads@kiilerich.com> - 2.9-2
+- use %{_pkgdocdir} to get the new path to unversioned doc dir (#993947)
+
 * Sun Aug 04 2013 Mads Kiilerich <mads@kiilerich.com> - 2.9-1
 - tortoisehg-2.9
 - rename desktop file to thg.desktop so it matches WM_CLASS
