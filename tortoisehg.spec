@@ -1,7 +1,7 @@
 %{!?python_sitelib: %global python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
 
 Name:           tortoisehg
-Version:        2.9.1
+Version:        2.9.2
 Release:        1%{?dist}
 Summary:        Mercurial GUI command line tool thg
 Group:          Development/Tools
@@ -61,17 +61,7 @@ mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/mercurial/hgrc.d
 install contrib/mergetools.rc $RPM_BUILD_ROOT%{_sysconfdir}/mercurial/hgrc.d/thgmergetools.rc
 
 ln -s tortoisehg/icons/svg/thg_logo.svg $RPM_BUILD_ROOT%{_datadir}/pixmaps/thg_logo.svg
-cat > thg.desktop << EOF
-[Desktop Entry]
-Type=Application
-Name=TortoiseHg
-GenericName=Version Control GUI
-Comment=GUI application for using Mercurial
-Icon=thg_logo
-Exec=thg --nofork
-Categories=Development;RevisionControl;
-EOF
-desktop-file-install --dir=$RPM_BUILD_ROOT%{_datadir}/applications thg.desktop
+desktop-file-install --dir=$RPM_BUILD_ROOT%{_datadir}/applications contrib/thg.desktop
 
 %find_lang %{name}
 
@@ -96,6 +86,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/nautilus-python/extensions/nautilus-thg.py*
 
 %changelog
+* Wed Oct 09 2013 Mads Kiilerich <mads@kiilerich.com> - 2.9.2-1
+- tortoisehg 2.9.2
+
 * Mon Sep 09 2013 Mads Kiilerich <mads@kiilerich.com> - 2.9.1-1
 - tortoisehg-2.9.1
 - .desktop file is now named correctly upstream ... but not in the tar
