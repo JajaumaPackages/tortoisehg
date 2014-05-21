@@ -1,7 +1,7 @@
 %{!?python_sitelib: %global python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
 
 Name:           tortoisehg
-Version:        2.11.2
+Version:        3.0
 Release:        1%{?dist}
 Summary:        Mercurial GUI command line tool thg
 Group:          Development/Tools
@@ -11,7 +11,7 @@ URL:            http://tortoisehg.bitbucket.org/
 Source0:        http://bitbucket.org/tortoisehg/targz/downloads/%{name}-%{version}.tar.gz
 BuildArch:      noarch
 BuildRequires:  python-devel, gettext, python-sphinx, PyQt4-devel, desktop-file-utils
-Requires:       python-iniparse, mercurial < 2.10
+Requires:       python-iniparse, mercurial < 3.1
 # gconf needed at util/shlib.py for browse_url(url).
 Requires:       gnome-python2-gconf
 Requires:       PyQt4 >= 4.6, qscintilla-python, python-pygments
@@ -86,6 +86,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/nautilus-python/extensions/nautilus-thg.py*
 
 %changelog
+* Wed May 21 2014 Mads Kiilerich <mads@kiilerich.com> - 3.0-1
+- tortoisehg 3.0
+
 * Thu Apr 03 2014 Mads Kiilerich <mads@kiilerich.com> - 2.11.2-1
 - tortoisehg 2.11.2
 
