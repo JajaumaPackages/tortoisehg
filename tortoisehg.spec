@@ -1,7 +1,7 @@
 %{!?python_sitelib: %global python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
 
 Name:           tortoisehg
-Version:        3.1.1
+Version:        3.2.1
 Release:        1%{?dist}
 Summary:        Mercurial GUI command line tool thg
 Group:          Development/Tools
@@ -11,7 +11,7 @@ URL:            http://tortoisehg.bitbucket.org/
 Source0:        http://bitbucket.org/tortoisehg/targz/downloads/%{name}-%{version}.tar.gz
 BuildArch:      noarch
 BuildRequires:  python-devel, gettext, python-sphinx, PyQt4-devel, desktop-file-utils
-Requires:       python-iniparse, mercurial < 3.1
+Requires:       python-iniparse, mercurial < 3.3
 # gconf needed at util/shlib.py for browse_url(url).
 Requires:       gnome-python2-gconf
 Requires:       PyQt4 >= 4.6, qscintilla-python, python-pygments
@@ -43,8 +43,8 @@ icon_path    = "%{_datadir}/pixmaps/tortoisehg/icons"
 nofork       = True
 EOT
 
-# hack: accept a higher Mercurial version
-#sed -i -e 's, + 1, + 2,g' -e 's,== nextver,<= nextver,g' tortoisehg/util/hgversion.py
+# hack: accept different Mercurial versions
+sed -i 's,^\(testedwith =\).*,\1 "3.0 3.1 3.2",g' tortoisehg/util/hgversion.py
 
 %build
 %{__python} setup.py build
@@ -86,6 +86,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/nautilus-python/extensions/nautilus-thg.py*
 
 %changelog
+* Sun Dec 14 2014 Mads Kiilerich <mads@kiilerich.com> - 3.2.1-1
+- tortoisehg 3.2.1
+
 * Sun Sep 07 2014 Mads Kiilerich <mads@kiilerich.com> - 3.1.1-1
 - tortoisehg 3.1.1
 
