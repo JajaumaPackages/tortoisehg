@@ -2,7 +2,7 @@
 
 Name:           tortoisehg
 Version:        3.3
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Mercurial GUI command line tool thg
 Group:          Development/Tools
 License:        GPLv2
@@ -44,7 +44,7 @@ nofork       = True
 EOT
 
 # hack: accept different Mercurial versions
-sed -i 's,^\(testedwith =\).*,\1 "3.0 3.1 3.2",g' tortoisehg/util/hgversion.py
+#sed -i 's,^\(testedwith =\).*,\1 "3.2 3.3",g' tortoisehg/util/hgversion.py
 
 %build
 %{__python} setup.py build
@@ -86,6 +86,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/nautilus-python/extensions/nautilus-thg.py*
 
 %changelog
+* Fri Feb 20 2015 Mads Kiilerich <mads@kiilerich.com> - 3.3-3
+- actually support Mercurial 3.3 - disable hack
+
 * Wed Feb 18 2015 Mads Kiilerich <mads@kiilerich.com> - 3.3-2
 - require Mercurial < 3.4
 
