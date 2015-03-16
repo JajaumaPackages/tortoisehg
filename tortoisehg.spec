@@ -1,8 +1,8 @@
 %{!?python_sitelib: %global python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
 
 Name:           tortoisehg
-Version:        3.3
-Release:        3%{?dist}
+Version:        3.3.2
+Release:        1%{?dist}
 Summary:        Mercurial GUI command line tool thg
 Group:          Development/Tools
 License:        GPLv2
@@ -86,6 +86,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/nautilus-python/extensions/nautilus-thg.py*
 
 %changelog
+* Mon Mar 16 2015 Mads Kiilerich <mads@kiilerich.com> - 3.3.2-1
+- tortoisehg 3.3.2
+
 * Fri Feb 20 2015 Mads Kiilerich <mads@kiilerich.com> - 3.3-3
 - actually support Mercurial 3.3 - disable hack
 
