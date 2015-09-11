@@ -1,8 +1,8 @@
 %{!?python_sitelib: %global python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
 
 Name:           tortoisehg
-Version:        3.5
-Release:        2%{?dist}
+Version:        3.5.1
+Release:        1%{?dist}
 Summary:        Mercurial GUI command line tool thg
 Group:          Development/Tools
 License:        GPLv2
@@ -44,7 +44,7 @@ nofork       = True
 EOT
 
 # hack: accept different Mercurial versions
-sed -i 's,^\(testedwith =\).*,\1 "3.3 3.4 3.5",g' tortoisehg/util/hgversion.py
+#sed -i 's,^\(testedwith =\).*,\1 "3.3 3.4 3.5",g' tortoisehg/util/hgversion.py
 
 %build
 %{__python} setup.py build
@@ -86,6 +86,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/nautilus-python/extensions/nautilus-thg.py*
 
 %changelog
+* Fri Sep 11 2015 Mads Kiilerich <mads@kiilerich.com> - 3.5.1-1
+- tortoisehg 3.5.1
+
 * Sat Aug 15 2015 Mads Kiilerich <mads@kiilerich.com> - 3.5-2
 - support Mercurial 3.5 in dependencies too
 
