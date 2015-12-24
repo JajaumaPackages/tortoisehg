@@ -2,7 +2,7 @@
 
 Name:           tortoisehg
 Version:        3.6.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Mercurial GUI command line tool thg
 Group:          Development/Tools
 License:        GPLv2
@@ -11,7 +11,7 @@ URL:            http://tortoisehg.bitbucket.org/
 Source0:        http://bitbucket.org/tortoisehg/targz/downloads/%{name}-%{version}.tar.gz
 BuildArch:      noarch
 BuildRequires:  python-devel, gettext, python-sphinx, PyQt4-devel, desktop-file-utils
-Requires:       python-iniparse, mercurial < 3.6
+Requires:       python-iniparse, mercurial < 3.7
 # gconf needed at util/shlib.py for browse_url(url).
 Requires:       gnome-python2-gconf
 Requires:       PyQt4 >= 4.6, qscintilla-python, python-pygments
@@ -86,6 +86,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/nautilus-python/extensions/nautilus-thg.py*
 
 %changelog
+* Thu Dec 24 2015 Mads Kiilerich <mads@kiilerich.com> - 3.6.2-2
+- support Mercurial 3.6.x in dependencies
+
 * Thu Dec 24 2015 Mads Kiilerich <mads@kiilerich.com> - 3.6.2-1
 - tortoisehg 3.6.2
 
