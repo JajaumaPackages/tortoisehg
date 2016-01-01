@@ -9,6 +9,7 @@ License:        GPLv2
 # - few files are however under the more permissive GPLv2+
 URL:            http://tortoisehg.bitbucket.org/
 Source0:        http://bitbucket.org/tortoisehg/targz/downloads/%{name}-%{version}.tar.gz
+Source1:        tortoisehg.appdata.xml
 BuildArch:      noarch
 BuildRequires:  python-devel, gettext, python-sphinx, PyQt4-devel, desktop-file-utils
 Requires:       python-iniparse, mercurial < 3.7
@@ -63,8 +64,12 @@ install contrib/mergetools.rc $RPM_BUILD_ROOT%{_sysconfdir}/mercurial/hgrc.d/thg
 
 ln -s tortoisehg/icons/scalable/apps/thg.svg $RPM_BUILD_ROOT%{_datadir}/pixmaps/thg_logo.svg
 desktop-file-install --dir=$RPM_BUILD_ROOT%{_datadir}/applications contrib/thg.desktop
+install -D %{SOURCE1} $RPM_BUILD_ROOT/%{_datadir}/appdata/tortoisehg.appdata.xml
 
 %find_lang %{name}
+
+%check
+appstream-util validate-relax --nonet $RPM_BUILD_ROOT/%{_datadir}/appdata/tortoisehg.appdata.xml
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -74,6 +79,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,-)
 %doc COPYING.txt doc/build/html/
 %{_bindir}/thg
+%{_datadir}/appdata/tortoisehg.appdata.xml
 %{python_sitelib}/tortoisehg/
 %{python_sitelib}/tortoisehg-*.egg-info
 %{_datadir}/pixmaps/tortoisehg/
@@ -89,6 +95,7 @@ rm -rf $RPM_BUILD_ROOT
 %changelog
 * Fri Jan 01 2016 Mads Kiilerich <mads@kiilerich.com> - 3.6.2-2
 - Fix nautilus plugin - add python-gobject-base as dependency
+- Introduce tortoisehg.appdata.xml with appdata info for GNOME Software
 
 * Thu Dec 24 2015 Mads Kiilerich <mads@kiilerich.com> - 3.6.2-1
 - tortoisehg 3.6.2
