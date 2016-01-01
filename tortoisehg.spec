@@ -2,7 +2,7 @@
 
 Name:           tortoisehg
 Version:        3.6.2
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Mercurial GUI command line tool thg
 Group:          Development/Tools
 License:        GPLv2
@@ -11,7 +11,7 @@ URL:            http://tortoisehg.bitbucket.org/
 Source0:        http://bitbucket.org/tortoisehg/targz/downloads/%{name}-%{version}.tar.gz
 Source1:        tortoisehg.appdata.xml
 BuildArch:      noarch
-BuildRequires:  python-devel, gettext, python-sphinx, PyQt4-devel, desktop-file-utils
+BuildRequires:  python-devel, gettext, python-sphinx, PyQt4-devel, desktop-file-utils, libappstream-glib
 Requires:       python-iniparse, mercurial < 3.7
 # gconf needed at util/shlib.py for browse_url(url).
 Requires:       gnome-python2-gconf
@@ -93,6 +93,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/nautilus-python/extensions/nautilus-thg.py*
 
 %changelog
+* Fri Jan 01 2016 Mads Kiilerich <mads@kiilerich.com> - 3.6.2-3
+- Add missing BuildRequires for appstream-util
+
 * Fri Jan 01 2016 Mads Kiilerich <mads@kiilerich.com> - 3.6.2-2
 - Fix nautilus plugin - add python-gobject-base as dependency
 - Introduce tortoisehg.appdata.xml with appdata info for GNOME Software
