@@ -2,7 +2,7 @@
 
 Name:           tortoisehg
 Version:        3.6.2
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Mercurial GUI command line tool thg
 Group:          Development/Tools
 License:        GPLv2
@@ -93,6 +93,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/nautilus-python/extensions/nautilus-thg.py*
 
 %changelog
+* Fri Feb 05 2016 Fedora Release Engineering <releng@fedoraproject.org> - 3.6.2-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
+
 * Fri Jan 01 2016 Mads Kiilerich <mads@kiilerich.com> - 3.6.2-3
 - Fix nautilus plugin - add python-gobject-base as dependency
 - Introduce tortoisehg.appdata.xml with appdata info for GNOME Software
