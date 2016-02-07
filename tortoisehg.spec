@@ -2,7 +2,7 @@
 
 Name:           tortoisehg
 Version:        3.6.2
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        Mercurial GUI command line tool thg
 Group:          Development/Tools
 License:        GPLv2
@@ -64,7 +64,7 @@ install contrib/mergetools.rc $RPM_BUILD_ROOT%{_sysconfdir}/mercurial/hgrc.d/thg
 
 ln -s tortoisehg/icons/scalable/apps/thg.svg $RPM_BUILD_ROOT%{_datadir}/pixmaps/thg_logo.svg
 desktop-file-install --dir=$RPM_BUILD_ROOT%{_datadir}/applications contrib/thg.desktop
-install -D %{SOURCE1} $RPM_BUILD_ROOT/%{_datadir}/appdata/tortoisehg.appdata.xml
+install -D %{SOURCE1} -m 644 $RPM_BUILD_ROOT/%{_datadir}/appdata/tortoisehg.appdata.xml
 
 %find_lang %{name}
 
@@ -93,6 +93,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/nautilus-python/extensions/nautilus-thg.py*
 
 %changelog
+* Sun Feb 07 2016 Mads Kiilerich <mads@kiilerich.com> - 3.6.2-5
+- Install tortoisehg.appdata.xml as mode 644 - avoid rmplint 'script-without-shebang'
+
 * Fri Feb 05 2016 Fedora Release Engineering <releng@fedoraproject.org> - 3.6.2-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
 
