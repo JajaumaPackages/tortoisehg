@@ -1,8 +1,8 @@
 %{!?python_sitelib: %global python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
 
 Name:           tortoisehg
-Version:        3.6.2
-Release:        5%{?dist}
+Version:        3.7.1
+Release:        1%{?dist}
 Summary:        Mercurial GUI command line tool thg
 Group:          Development/Tools
 License:        GPLv2
@@ -12,7 +12,7 @@ Source0:        http://bitbucket.org/tortoisehg/targz/downloads/%{name}-%{versio
 Source1:        tortoisehg.appdata.xml
 BuildArch:      noarch
 BuildRequires:  python-devel, gettext, python-sphinx, PyQt4-devel, desktop-file-utils, libappstream-glib
-Requires:       python-iniparse, mercurial < 3.7
+Requires:       python-iniparse, mercurial < 3.8
 # gconf needed at util/shlib.py for browse_url(url).
 Requires:       gnome-python2-gconf
 Requires:       PyQt4 >= 4.6, qscintilla-python, python-pygments
@@ -93,6 +93,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/nautilus-python/extensions/nautilus-thg.py*
 
 %changelog
+* Sun Feb 07 2016 Mads Kiilerich <mads@kiilerich.com> - 3.7.1-1
+- tortoisehg 3.7.1
+
 * Sun Feb 07 2016 Mads Kiilerich <mads@kiilerich.com> - 3.6.2-5
 - Install tortoisehg.appdata.xml as mode 644 - avoid rmplint 'script-without-shebang'
 
