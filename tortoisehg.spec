@@ -1,7 +1,7 @@
 %{!?python_sitelib: %global python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
 
 Name:           tortoisehg
-Version:        3.7.1
+Version:        3.7.2
 Release:        1%{?dist}
 Summary:        Mercurial GUI command line tool thg
 Group:          Development/Tools
@@ -93,6 +93,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/nautilus-python/extensions/nautilus-thg.py*
 
 %changelog
+* Sat Mar 05 2016 Mads Kiilerich <mads@kiilerich.com> - 3.7.2-1
+- tortoisehg 3.7.2
+
 * Sun Feb 07 2016 Mads Kiilerich <mads@kiilerich.com> - 3.7.1-1
 - tortoisehg 3.7.1
 
