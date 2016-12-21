@@ -1,7 +1,7 @@
 %{!?python_sitelib: %global python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
 
 Name:           tortoisehg
-Version:        3.8.3
+Version:        4.0.1
 Release:        1%{?dist}
 Summary:        Mercurial GUI command line tool thg
 Group:          Development/Tools
@@ -12,7 +12,7 @@ Source0:        http://bitbucket.org/tortoisehg/targz/downloads/%{name}-%{versio
 Source1:        tortoisehg.appdata.xml
 BuildArch:      noarch
 BuildRequires:  python-devel, gettext, python-sphinx, PyQt4-devel, desktop-file-utils, libappstream-glib
-Requires:       python-iniparse, mercurial < 3.9
+Requires:       python-iniparse, mercurial < 4.1
 # gconf needed at util/shlib.py for browse_url(url).
 Requires:       gnome-python2-gconf
 Requires:       PyQt4 >= 4.6, qscintilla-python, python-pygments
@@ -46,7 +46,7 @@ nofork       = True
 EOT
 
 # hack: accept different Mercurial versions
-#sed -i 's,^\(testedwith =\).*,\1 "3.3 3.4 3.5",g' tortoisehg/util/hgversion.py
+sed -i 's,^\(testedwith =\).*,\1 "3.8 3.9 4.0",g' tortoisehg/util/hgversion.py
 
 %build
 %{__python} setup.py build
@@ -58,6 +58,7 @@ rm doc/build/html/.buildinfo
 rm -rf $RPM_BUILD_ROOT
 
 %{__python} setup.py install -O1 --skip-build --root $RPM_BUILD_ROOT
+rm $RPM_BUILD_ROOT/%{python_sitelib}/hgext3rd/__init__.*
 
 mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/mercurial/hgrc.d
 install contrib/mergetools.rc $RPM_BUILD_ROOT%{_sysconfdir}/mercurial/hgrc.d/thgmergetools.rc
@@ -80,6 +81,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc COPYING.txt doc/build/html/
 %{_bindir}/thg
 %{_datadir}/appdata/tortoisehg.appdata.xml
+%{python_sitelib}/hgext3rd/thg.py*
 %{python_sitelib}/tortoisehg/
 %{python_sitelib}/tortoisehg-*.egg-info
 %{_datadir}/pixmaps/tortoisehg/
@@ -93,6 +95,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/nautilus-python/extensions/nautilus-thg.py*
 
 %changelog
+* Tue Dec 20 2016 Mads Kiilerich <mads@kiilerich.com> - 4.0.1-1
+- tortoisehg 4.0.1
+
 * Sun Jun 05 2016 Mads Kiilerich <mads@kiilerich.com> - 3.8.3-1
 - tortoisehg 3.8.3
 
