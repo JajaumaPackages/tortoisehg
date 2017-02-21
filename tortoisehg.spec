@@ -1,8 +1,8 @@
 %{!?python_sitelib: %global python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
 
 Name:           tortoisehg
-Version:        4.0.1
-Release:        2%{?dist}
+Version:        4.1
+Release:        1%{?dist}
 Summary:        Mercurial GUI command line tool thg
 Group:          Development/Tools
 License:        GPLv2
@@ -12,7 +12,7 @@ Source0:        http://bitbucket.org/tortoisehg/targz/downloads/%{name}-%{versio
 Source1:        tortoisehg.appdata.xml
 BuildArch:      noarch
 BuildRequires:  python-devel, gettext, python-sphinx, PyQt4-devel, desktop-file-utils, libappstream-glib
-Requires:       python-iniparse, mercurial < 4.1
+Requires:       python-iniparse, mercurial < 4.2
 # gconf needed at util/shlib.py for browse_url(url).
 Requires:       gnome-python2-gconf
 Requires:       PyQt4 >= 4.6, qscintilla-python, python-pygments
@@ -46,7 +46,7 @@ nofork       = True
 EOT
 
 # hack: accept different Mercurial versions
-sed -i 's,^\(testedwith =\).*,\1 "3.8 3.9 4.0",g' tortoisehg/util/hgversion.py
+#sed -i 's,^\(testedwith =\).*,\1 "3.8 3.9 4.0",g' tortoisehg/util/hgversion.py
 
 %build
 %{__python} setup.py build
@@ -95,6 +95,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/nautilus-python/extensions/nautilus-thg.py*
 
 %changelog
+* Tue Feb 21 2017 Mads Kiilerich <mads@kiilerich.com> - 4.1-1
+- tortoisehg 4.1
+
 * Sat Feb 11 2017 Fedora Release Engineering <releng@fedoraproject.org> - 4.0.1-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
 
