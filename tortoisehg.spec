@@ -1,18 +1,18 @@
 %{!?python_sitelib: %global python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
 
 Name:           tortoisehg
-Version:        4.1.2
+Version:        4.2
 Release:        1%{?dist}
 Summary:        Mercurial GUI command line tool thg
 Group:          Development/Tools
 License:        GPLv2
 # - few files are however under the more permissive GPLv2+
-URL:            http://tortoisehg.bitbucket.org/
-Source0:        http://bitbucket.org/tortoisehg/targz/downloads/%{name}-%{version}.tar.gz
+URL:            https://tortoisehg.bitbucket.org/
+Source0:        https://bitbucket.org/tortoisehg/targz/downloads/%{name}-%{version}.tar.gz
 Source1:        tortoisehg.appdata.xml
 BuildArch:      noarch
 BuildRequires:  python-devel, gettext, python-sphinx, PyQt4-devel, desktop-file-utils, libappstream-glib
-Requires:       python-iniparse, mercurial < 4.2
+Requires:       python-iniparse, mercurial < 4.3
 # gconf needed at util/shlib.py for browse_url(url).
 Requires:       gnome-python2-gconf
 Requires:       PyQt4 >= 4.6, qscintilla-python, python-pygments
@@ -46,7 +46,7 @@ nofork       = True
 EOT
 
 # hack: accept different Mercurial versions
-#sed -i 's,^\(testedwith =\).*,\1 "3.8 3.9 4.0",g' tortoisehg/util/hgversion.py
+sed -i "s,^\(testedwith = \)'4.1 4.2',\1 '4.0 4.1 4.2',g" tortoisehg/util/hgversion.py
 
 %build
 %{__python} setup.py build
@@ -95,6 +95,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/nautilus-python/extensions/nautilus-thg.py*
 
 %changelog
+* Sun May 07 2017 Mads Kiilerich <mads@kiilerich.com> - 4.2-1
+- tortoisehg 4.2
+
 * Wed Apr 05 2017 Mads Kiilerich <mads@kiilerich.com> - 4.1.2-1
 - tortoisehg 4.1.2
 
@@ -206,7 +209,7 @@ rm -rf $RPM_BUILD_ROOT
 - .desktop file is now named correctly upstream ... but not in the tar
 
 * Wed Aug 07 2013 Mads Kiilerich <mads@kiilerich.com> - 2.9-2
-- use %{_pkgdocdir} to get the new path to unversioned doc dir (#993947)
+- use %%{_pkgdocdir} to get the new path to unversioned doc dir (#993947)
 
 * Sun Aug 04 2013 Mads Kiilerich <mads@kiilerich.com> - 2.9-1
 - tortoisehg-2.9

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2016 Mads Kiilerich <mads@kiilerich.com> -->
 <component type="desktop">
  <id>thg.desktop</id>
  <metadata_license>CC0-1.0</metadata_license>
@@ -18,7 +19,7 @@
  <screenshots>
   <!-- From http://tortoisehg.bitbucket.org/screenshots.html -->
   <screenshot type="default">
-   <image>http://tortoisehg.bitbucket.org/img/vt_history.png</image>
+   <image>https://tortoisehg.bitbucket.io/img/vt_history.png</image>
    <caption>The main window: The TortoiseHg Workbench</caption>
   </screenshot>
  </screenshots>
