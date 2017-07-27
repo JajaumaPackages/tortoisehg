@@ -1,6 +1,6 @@
 Name:           tortoisehg
 Version:        4.2.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Mercurial GUI command line tool thg
 License:        GPLv2
 # - few files are however under the more permissive GPLv2+
@@ -83,6 +83,9 @@ appstream-util validate-relax --nonet $RPM_BUILD_ROOT/%{_datadir}/appdata/tortoi
 %{_datadir}/nautilus-python/extensions/nautilus-thg.py*
 
 %changelog
+* Thu Jul 27 2017 Fedora Release Engineering <releng@fedoraproject.org> - 4.2.1-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
+
 * Wed Jul 05 2017 Björn Esser <besser82@fedoraproject.org> - 4.2.1-1
 - tortoisehg 4.2.1 (rhbz#917634)
 - Update spec file to recent guidelines
