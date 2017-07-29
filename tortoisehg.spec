@@ -1,17 +1,14 @@
-%{!?python_sitelib: %global python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
-
 Name:           tortoisehg
 Version:        4.2.2
 Release:        1%{?dist}
 Summary:        Mercurial GUI command line tool thg
-Group:          Development/Tools
 License:        GPLv2
 # - few files are however under the more permissive GPLv2+
 URL:            https://tortoisehg.bitbucket.org/
 Source0:        https://bitbucket.org/tortoisehg/targz/downloads/%{name}-%{version}.tar.gz
 Source1:        tortoisehg.appdata.xml
 BuildArch:      noarch
-BuildRequires:  python-devel, gettext, python-sphinx, PyQt4-devel, desktop-file-utils, libappstream-glib
+BuildRequires:  python2-devel, gettext, python-sphinx, PyQt4-devel, desktop-file-utils, libappstream-glib
 Requires:       python-iniparse, mercurial < 4.3
 # gconf needed at util/shlib.py for browse_url(url).
 Requires:       gnome-python2-gconf
@@ -24,7 +21,6 @@ user interface to the Mercurial distributed revision control system.
 
 %package        nautilus
 Summary:        Mercurial GUI plug-in to the Nautilus file manager
-Group:          Development/Tools
 Requires:       %{name} = %{version}-%{release}, nautilus-python
 
 %description    nautilus
@@ -35,7 +31,7 @@ with a graphical interface.
 Note that the nautilus extension has been deprecated upstream.
 
 %prep
-%setup -q
+%autosetup -p 1
 
 cat > tortoisehg/util/config.py << EOT
 bin_path     = "%{_bindir}"
@@ -49,36 +45,31 @@ EOT
 sed -i "s,^\(testedwith = \)'4.1 4.2',\1 '4.0 4.1 4.2',g" tortoisehg/util/hgversion.py
 
 %build
-%{__python} setup.py build
+%py2_build
 
 (cd doc && make html)
 rm doc/build/html/.buildinfo
 
 %install
-rm -rf $RPM_BUILD_ROOT
-
-%{__python} setup.py install -O1 --skip-build --root $RPM_BUILD_ROOT
+%py2_install
 rm $RPM_BUILD_ROOT/%{python_sitelib}/hgext3rd/__init__.*
 
 mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/mercurial/hgrc.d
-install contrib/mergetools.rc $RPM_BUILD_ROOT%{_sysconfdir}/mercurial/hgrc.d/thgmergetools.rc
+install -pm0644 contrib/mergetools.rc $RPM_BUILD_ROOT%{_sysconfdir}/mercurial/hgrc.d/thgmergetools.rc
 
 ln -s tortoisehg/icons/scalable/apps/thg.svg $RPM_BUILD_ROOT%{_datadir}/pixmaps/thg_logo.svg
 desktop-file-install --dir=$RPM_BUILD_ROOT%{_datadir}/applications contrib/thg.desktop
-install -D %{SOURCE1} -m 644 $RPM_BUILD_ROOT/%{_datadir}/appdata/tortoisehg.appdata.xml
+install -D %{SOURCE1} -pm0644 $RPM_BUILD_ROOT/%{_datadir}/appdata/tortoisehg.appdata.xml
 
 %find_lang %{name}
 
 %check
 appstream-util validate-relax --nonet $RPM_BUILD_ROOT/%{_datadir}/appdata/tortoisehg.appdata.xml
 
-%clean
-rm -rf $RPM_BUILD_ROOT
-
 %files -f %{name}.lang
-
-%defattr(-,root,root,-)
-%doc COPYING.txt doc/build/html/
+%license COPYING.txt
+%doc doc/build/html/
+%config(noreplace) %{_sysconfdir}/mercurial/hgrc.d/thgmergetools.rc
 %{_bindir}/thg
 %{_datadir}/appdata/tortoisehg.appdata.xml
 %{python_sitelib}/hgext3rd/thg.py*
@@ -88,15 +79,16 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/pixmaps/thg_logo.svg
 %{_datadir}/applications/thg.desktop
 
-%config(noreplace) %attr(644,root,root) %{_sysconfdir}/mercurial/hgrc.d/thgmergetools.rc
-
 %files nautilus
-%defattr(-,root,root,-)
 %{_datadir}/nautilus-python/extensions/nautilus-thg.py*
 
 %changelog
 * Sat Jul 29 2017 Mads Kiilerich <mads@kiilerich.com> - 4.2.2-1
 - tortoisehg 4.2.2
+
+* Wed Jul 05 2017 Björn Esser <besser82@fedoraproject.org> - 4.2.1-1
+- tortoisehg 4.2.1 (rhbz#917634)
+- Update spec file to recent guidelines
 
 * Sun May 07 2017 Mads Kiilerich <mads@kiilerich.com> - 4.2-1
 - tortoisehg 4.2
