@@ -1,5 +1,5 @@
 Name:           tortoisehg
-Version:        4.2.2
+Version:        4.3.1
 Release:        1%{?dist}
 Summary:        Mercurial GUI command line tool thg
 License:        GPLv2
@@ -83,6 +83,9 @@ appstream-util validate-relax --nonet $RPM_BUILD_ROOT/%{_datadir}/appdata/tortoi
 %{_datadir}/nautilus-python/extensions/nautilus-thg.py*
 
 %changelog
+* Wed Oct 18 2017 Jajauma's Packages <jajauma@yandex.ru> - 4.3.1-1
+- Update to latest upstream release
+
 * Sat Jul 29 2017 Mads Kiilerich <mads@kiilerich.com> - 4.2.2-1
 - tortoisehg 4.2.2
 
