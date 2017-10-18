@@ -9,7 +9,7 @@ Source0:        https://bitbucket.org/tortoisehg/targz/downloads/%{name}-%{versi
 Source1:        tortoisehg.appdata.xml
 BuildArch:      noarch
 BuildRequires:  python2-devel, gettext, python-sphinx, PyQt4-devel, desktop-file-utils, libappstream-glib
-Requires:       python-iniparse, mercurial < 4.3
+Requires:       python-iniparse, mercurial >= 4.0.0
 # gconf needed at util/shlib.py for browse_url(url).
 Requires:       gnome-python2-gconf
 Requires:       PyQt4 >= 4.6, qscintilla-python, python-pygments
@@ -85,6 +85,7 @@ appstream-util validate-relax --nonet $RPM_BUILD_ROOT/%{_datadir}/appdata/tortoi
 %changelog
 * Wed Oct 18 2017 Jajauma's Packages <jajauma@yandex.ru> - 4.3.1-1
 - Update to latest upstream release
+- Require any 4.x.x version of mercurial
 
 * Sat Jul 29 2017 Mads Kiilerich <mads@kiilerich.com> - 4.2.2-1
 - tortoisehg 4.2.2
