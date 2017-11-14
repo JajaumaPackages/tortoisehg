@@ -1,6 +1,6 @@
 Name:           tortoisehg
 Version:        4.3.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Mercurial GUI command line tool thg
 License:        GPLv2
 # - few files are however under the more permissive GPLv2+
@@ -42,7 +42,7 @@ nofork       = True
 EOT
 
 # hack: accept different Mercurial versions
-sed -i "s,^\(testedwith = \)'4.1 4.2',\1 '4.0 4.1 4.2',g" tortoisehg/util/hgversion.py
+sed -i "s,^\(testedwith = \)'.*',\1 '4.0 4.1 4.2 4.3 4.4',g" tortoisehg/util/hgversion.py
 
 %build
 %py2_build
@@ -83,6 +83,9 @@ appstream-util validate-relax --nonet $RPM_BUILD_ROOT/%{_datadir}/appdata/tortoi
 %{_datadir}/nautilus-python/extensions/nautilus-thg.py*
 
 %changelog
+* Tue Nov 14 2017 Jajauma's Packages <jajauma@yandex.ru> - 4.3.1-2
+- Accept more mercurial versions
+
 * Wed Oct 18 2017 Jajauma's Packages <jajauma@yandex.ru> - 4.3.1-1
 - Update to latest upstream release
 - Require any 4.x.x version of mercurial
